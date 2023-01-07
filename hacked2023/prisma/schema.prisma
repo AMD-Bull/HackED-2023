@@ -10,6 +10,10 @@ datasource db {
 model Professor {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String
+  course_quality Float
+  communication  Float
+  teaching_quality Float
+  overall       Float
   courses    ProfHasCourse[]
 }
 
@@ -17,6 +21,9 @@ model Course {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String   @unique
   faculty    String
+  course_quality Float
+  knowledge_increase Float
+  overall Float
   professors ProfHasCourse[]
 }
 
@@ -24,7 +31,26 @@ model ProfHasCourse {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   prof_id    String    @db.ObjectId
   course_id  String    @db.ObjectId
+  
+  // Smaller data sets
+  goals_obj  Float
+  time_use   Float
+  motivation Float
+  knowledge  Float
+  course_quality Float
+  instructor_clarity Float
+  preparedness Float
+  student_respect Float
+  feedback Float
+  instructor_quality Float
+
+  // Mains
+  total_score Float
+  total_course_score Float
+  total_comm_score   Float
+
   professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
 }
+
 
