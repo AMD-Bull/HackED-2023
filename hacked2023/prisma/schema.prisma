@@ -15,6 +15,7 @@ model Professor {
   teaching_quality Float
   overall       Float
   courses    ProfHasCourse[]
+  currently_teaching   courseOffering[]
 }
 
 model Course {
@@ -25,6 +26,7 @@ model Course {
   knowledge_increase Float
   overall Float
   professors ProfHasCourse[]
+  offerings  courseOffering[]
 }
 
 model ProfHasCourse {
@@ -51,6 +53,27 @@ model ProfHasCourse {
 
   professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+}
+
+model courseOffering {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  course_name String 
+  day         String
+  time        String
+  course_id   String   @db.ObjectId
+  prof_id    String   @db.ObjectId
+  course      Course @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  professor   Professor @relation(fields: [prof_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  course_labs courseLab[]
+}
+
+model courseLab {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  offering_id  String    @db.ObjectId
+  day String
+  time String
+  course_code Int
+  course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
 }
 
 
