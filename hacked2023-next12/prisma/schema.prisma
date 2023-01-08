@@ -24,6 +24,7 @@ model Course {
   title      String 
   course_quality Float
   knowledge_increase Float
+  description String
   overall Float
   professors ProfHasCourse[]
   offerings  courseOffering[]
