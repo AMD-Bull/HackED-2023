@@ -104,6 +104,9 @@ export async function getServerSideProps({params}){
     const course = await prisma.course.findMany({
         where: {
             name: params.className
+        },
+        include: {
+            professors: true
         }
     })
     console.log(course)

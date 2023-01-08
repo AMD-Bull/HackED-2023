@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
 
 html,
 body {
@@ -9,6 +9,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 * {
-  font-family: "Open Sans";
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
   box-sizing: border-box;
 }

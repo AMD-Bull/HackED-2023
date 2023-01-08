@@ -1,0 +1,74 @@
+
+
+.background {
+    background: #C7CCDB;
+    top: 80;
+    min-height:100vh;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px;
+    gap: 25px;
+}
+
+.ratingsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.profName {
+    display: flex;
+    font-size: 36px;
+    color: black;
+    align-items: center;
+}
+
+.overallRating {
+    display: flex;
+    font-size: 56px;
+    color: black;
+    margin: none;
+}
+
+.rating {
+    display: flex;
+    font-size: 32px;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    margin: none;
+}
+
+.classWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.classLink {
+    text-decoration: none;
+    width: stretch;
+}
+
+.classCard {
+    display: flex;
+    flex-direction: column;
+    background: #E1E5EE;
+    justify-content: none;
+    align-items: left;
+    padding: 15px;
+    border-radius: 20px;
+    /* box-shadow: 3px 3px 3px 1px gray; */
+    height: 100%;
+}
+
+.classCard:hover {
+    transform:scale(1.01);
+    transition: 0.5s ease;
+}
