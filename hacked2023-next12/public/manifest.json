@@ -1,0 +1,14 @@
+{
+  "short_name": "Grizzly Trails",
+  "name": "",
+  "icons": [
+    {
+      "src": "/media/grizzly_logo.png",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

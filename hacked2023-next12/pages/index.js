@@ -1,14 +1,67 @@
 import styles from '../styles/home.module.css'
+import React, { useState, useEffect } from 'react'
 
 import Navbar from '../components/navbar';
-import HomePage from '../components/homePage';
+import { PrismaClient } from '@prisma/client'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { Button } from '@mui/material';
 
 
-export default function Home() {
+export default function Home({ names }) {
+
   return (
     <main className={styles.main}>
       <Navbar />
-      <HomePage />
+      <div className={styles.contentWrapper}>
+          <div className={styles.description}>
+              <h1 className={styles.title}>
+                  Grizzly Trails
+              </h1>
+              <p className={styles.subtitle}>
+                  Faster and meaner than bear tracks
+              </p>
+          </div>
+          <form>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={names}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Course"/>}
+            />
+            <Button
+                type="submit"
+            >
+                Search
+            </Button>
+          </form>
+          {/* <form className={styles.form} action="#">
+          <datalist className={styles.list} id="courses">
+              <div dangerouslySetInnerHTML={{ __html: courses }} />
+          </datalist>
+          <input 
+              className={styles.searchBar}
+              placeholder="Search by class"
+              id="classname"
+              type="text"
+              autoComplete="off"
+              list="courses"
+              onKeyUp={filterClasses()}
+          />
+          </form> */}
+          <div className={styles.subLink}>
+          Or search by professor
+          </div>
+      </div>
     </main>
   )
+}
+
+export async function getServerSideProps(){
+    const prisma = new PrismaClient()
+    const courses = await prisma.course.findMany()
+    const names = courses.map(course => course.name);
+    console.log(names)
+    return { props: { names } }
 }
