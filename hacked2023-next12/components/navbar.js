@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import styles from '../styles/navbar.module.css'
+import Link from 'next/link'
 
 export default function Navbar() {
     return(
         <div className={styles.wrapper}>
             <div className={styles.leftSide}>
-                <a href="/">
+                <Link href="/">
                     <Image
                         src="/media/grizzly_logo.png"
                         alt="logo"
@@ -14,14 +15,14 @@ export default function Navbar() {
                         height={100}
                         priority
                     />
-                </a>
+                </Link>
                 <div className={styles.linkWrapper}>
-                    <a
+                    <Link
                         className={styles.link}
                         href="/"
                     >
                         Grizzly Trails
-                    </a>
+                    </Link>
                 </div>
             </div>
             {/* <div className={styles.rightSide}>
