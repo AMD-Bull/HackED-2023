@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client'
 export default function Class({ course }) {
 
     const router = useRouter()
-    const className = router.query.className   
+    const className = router.query.className
 
     return (
         <main className={styles.background}>

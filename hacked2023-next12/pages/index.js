@@ -1,15 +1,20 @@
 import styles from '../styles/home.module.css'
 import React, { useState, useEffect } from 'react'
-
 import Navbar from '../components/navbar';
 import { PrismaClient } from '@prisma/client'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
+import {useRouter} from 'next/router'
 
 
 export default function Home({ names }) {
-
+    const router = useRouter()
+    const [route, setRoute] = useState()
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        router.push("/classes/" + route)
+    }  
   return (
     <main className={styles.main}>
       <Navbar />
@@ -22,14 +27,8 @@ export default function Home({ names }) {
                   Faster and meaner than bear tracks
               </p>
           </div>
-          <form>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={names}
-              sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Course"/>}
-            />
+          <form onSubmit={handleSubmit}>
+            <input type="text" name='route' onChange={(e)=>{setRoute(e.target.value)}} />
             <Button
                 type="submit"
             >
