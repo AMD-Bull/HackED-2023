@@ -14,7 +14,7 @@ model Professor {
   communication  Float
   teaching_quality Float
   overall       Float
-  courses    ProfHasCourse[]
+  courses    prof_has_course[]
   currently_teaching   courseOffering[]
 }
 
@@ -26,34 +26,8 @@ model Course {
   knowledge_increase Float
   description String
   overall Float
-  professors ProfHasCourse[]
+  professors prof_has_course[]
   offerings  courseOffering[]
-}
-
-model ProfHasCourse {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  prof_id    String    @db.ObjectId
-  course_id  String    @db.ObjectId
-  
-  // Smaller data sets
-  goals_obj  Float
-  time_use   Float
-  motivation Float
-  knowledge  Float
-  course_quality Float
-  instructor_clarity Float
-  preparedness Float
-  student_respect Float
-  feedback Float
-  instructor_quality Float
-
-  // Mains
-  total_score        Float
-  total_course_score Float
-  total_comm_score   Float
-
-  professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
 }
 
 model courseOffering {
@@ -76,4 +50,25 @@ model courseLab {
   time             String
   course_code      Int
   course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+model prof_has_course {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  course_id          String @db.ObjectId
+  course_quality     Float
+  feedback           Float
+  goals_obj          Float
+  instructor_clarity Float
+  instructor_quality Float
+  knowledge          Float
+  motivation         Float
+  preparedness       Float
+  prof_id            String @db.ObjectId
+  student_respect    Float
+  time_use           Float
+  total_comm_score   Float
+  total_course_score Float
+  total_score        Float
+  professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
 }
