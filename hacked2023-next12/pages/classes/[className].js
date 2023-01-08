@@ -9,6 +9,42 @@ export default function Class({ course }) {
     const router = useRouter()
     const className = router.query.className
 
+    function getRounded (input) {
+        debugger;
+        return new Intl.NumberFormat('en', { maximumSignificantDigits: 1 }).format(input);
+    }
+
+    function getRand() {
+        return Math.floor(Math.random() * 200) + 1;
+    }
+
+    const profs = course[0].professors.map((prof, id) => {
+        console.log(prof.professor.name)
+        return (
+            <a className={styles.professorLink} href={"/professors/" + prof.professor.name}>
+                <div className={styles.professorCard}>
+                    <h4 className={styles.professorName}>
+                        {prof.professor.name}
+                    </h4>
+                    <div className={styles.professorRatingsWrapper}>
+                        <div className={styles.professorRating}>
+                            Overall: {getRounded(prof.professor.overall)}/5
+                        </div>
+                        <div className={styles.professorRating}>
+                            Course Quality: {getRounded(prof.professor.course_quality)}/5
+                        </div>
+                        <div className={styles.professorRating}>
+                            Communication: {getRounded(prof.professor.communication)}/5
+                        </div>
+                        <div className={styles.professorRating}>
+                            Teaching Quality: {getRounded(prof.professor.teaching_quality)}/5
+                        </div>
+                    </div>
+                </div>
+            </a>
+        );
+    });
+
     return (
         <main className={styles.background}>
             <Navbar />
@@ -18,12 +54,12 @@ export default function Class({ course }) {
                         {className} - {course[0].title}
                     </h1>
                     <p className={styles.classDescription}>
-                        Computer arithmetic and errors. The study of computational methods for solving problems in linear algebra, non-linear equations, optimization, interpolation and approximation, and integration. This course will provide a basic foundation in numerical methods that supports further study in machine learning; computer graphics, vision and multimedia; robotics; and other topics in Science and Engineering.
+                        {course[0].description}
                     </p>
                     <div className={styles.classDescription}>
                         Current course offerings:
                     </div>
-                    <div className={styles.scheduleWrapper}>
+                    {/* <div className={styles.scheduleWrapper}>
                         <div className={styles.schedule}>
                             <h3 className={styles.time}>
                                 9 am
@@ -48,11 +84,11 @@ export default function Class({ course }) {
                                 W23
                             </h3>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={styles.rightSide}>
                     <div className={styles.subtitle}>
-                        Over a total of x submissions
+                        Over a total of {getRand()} submissions
                     </div>
                     <div className={styles.ratingsWrapper}>
                         <h2 className={styles.overallRating}>
@@ -69,7 +105,10 @@ export default function Class({ course }) {
                         Professors who teach this course:
                     </div>
                     <div className={styles.professorWrapper}>
-                        <a className={styles.professorLink} href="/professors/Buddy McGuy">
+                        <li className={styles.list}>
+                            {profs}
+                        </li>
+                        {/* <a className={styles.professorLink} href="/professors/Buddy McGuy">
                             <div className={styles.professorCard}>
                                 <h4 className={styles.professorName}>
                                     Buddy McGuy
@@ -88,7 +127,7 @@ export default function Class({ course }) {
                                     idk how this will be
                                 </div>
                             </div>
-                        </a>
+                        </a> */}
                     </div>
                 </div>
             </div>
@@ -102,12 +141,19 @@ export async function getServerSideProps({params}){
     const prisma = new PrismaClient()
     const course = await prisma.course.findMany({
         where: {
-            name: params.className
+            name: {
+                equals: params.className
+            }
         },
         include: {
-            professors: true
+            professors: {
+                include: {
+                    professor: true
+                }
+            }
         }
     })
     console.log(course)
+    console.log(course[0].professors);
     return { props: { course } }
 }

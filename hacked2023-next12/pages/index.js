@@ -34,20 +34,21 @@ export default function Home({ names }) {
                   Faster and meaner than bear tracks
               </div>
           </div>
-          <form className={styles.searchWrapper} onSubmit={handleSubmit}>
+          <form className={styles.searchWrapper} onSubmit={handleSubmit} >
             <Autocomplete
                 route={route}
                 onChange={(event, newValue) => {
-                    setRoute(newValue);
+                    setRoute(newValue.toUpperCase());
                 }}
                 onInputChange={(event, newInputValue) => {
-                    setRoute(newInputValue);
+                    setRoute(newInputValue.toUpperCase());
                 }}
                 disablePortal
                 id="combo-box-demo"
                 options={names}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField className={styles.searchBar} {...params} name="route" label="Class" />}
+                sx={{ borderRadius: '50%' }}
+                fullwidth
+                renderInput={(params) => <TextField className={styles.searchBar} {...params} fullwidth name="route" label="Class" />}
             />
             <Button
                 type="submit"

@@ -1,5 +1,5 @@
 .background {
-    background: #C7CCDB;
+    background: #fbfaf5;
     min-height: 100vh;
     min-width: 100vh;
 }
@@ -123,7 +123,8 @@
     padding: 15px;
     border-radius: 20px;
     /* box-shadow: 3px 3px 3px 1px gray; */
-    height: 100%;
+    height: 400px;
+    width: auto;
 }
 
 .professorCard:hover {
@@ -133,8 +134,19 @@
 
 .professorName {
     color: black;
+    font-size: 26px;
 }
 
-.professorRatings {
+.professorRatingsWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.professorRating {
     color: black;
+    font-size: 20px;
+}
+
+.list {
+    list-style: none;
 }

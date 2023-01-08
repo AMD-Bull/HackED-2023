@@ -1,7 +1,7 @@
 
 
 .background {
-    background: #C7CCDB;
+    background: #fbfaf5;
     top: 80;
     min-height:100vh;
 }
@@ -43,6 +43,21 @@
     margin: none;
 }
 
+.courseRatingsWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.courseRating {
+    color: black;
+    font-size: 20px;
+}
+
+.courseName {
+    color: black;
+    font-size: 26px;
+}
+
 .classWrapper {
     display: flex;
     flex-direction: row;
@@ -71,4 +86,8 @@
 .classCard:hover {
     transform:scale(1.01);
     transition: 0.5s ease;
+}
+
+.list {
+    list-style: none;
 }

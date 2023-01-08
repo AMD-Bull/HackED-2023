@@ -8,6 +8,31 @@ export default function Class({ professor }) {
     const router = useRouter()
     const profName = router.query.profName   
 
+    const courses = professor[0].courses.map((course, id) => {
+        console.log(course.course.name)
+        return (
+            <a className={styles.courseLink} href={"/professors/" + course.course.name}>
+                <div className={styles.courseCard}>
+                    <h4 className={styles.courseName}>
+                        {course.course.name}
+                    </h4>
+                    <div className={styles.courseRatingsWrapper}>
+                        <div className={styles.courseRating}>
+                            Overall: {getRounded(course.course.overall)}/5
+                        </div>
+                        <div className={styles.courseRating}>
+                            Course Quality: {getRounded(course.course.communication)}/5
+                        </div>
+                        <div className={styles.courseRating}>
+                            Knowledge Increase: {getRounded(course.course.knowledge_increase)}/5
+                        </div>
+                    </div>
+                </div>
+            </a>
+        );
+    });
+
+
     return (
         <main className={styles.background}>
             <Navbar />
@@ -30,16 +55,9 @@ export default function Class({ professor }) {
                     {profName}
                 </div>
                 <div className={styles.classWrapper}>
-                    <a className={styles.classLink} href='/classes/{className}'>
-                        <div className={styles.classCard}>
-                            
-                        </div>
-                    </a>
-                    <a className={styles.classLink} href='/classes/{className}'>
-                        <div className={styles.classCard}>
-                            
-                        </div>
-                    </a>
+                    <li className={styles.list}>
+                        {courses}
+                    </li>
                 </div>
             </div>
         </main>
@@ -56,7 +74,11 @@ export async function getServerSideProps({params}){
             name: params.profName
         },
         include: {
-            courses: true
+            courses: {
+                include: {
+                    course: true
+                }
+            }
         }
     })
     console.log(professor)

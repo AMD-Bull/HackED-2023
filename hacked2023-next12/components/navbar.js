@@ -24,7 +24,7 @@ export default function Navbar() {
                     </a>
                 </div>
             </div>
-            <div className={styles.rightSide}>
+            {/* <div className={styles.rightSide}>
                 <div className={styles.linkWrapper}>
                     <a
                         className={styles.link}
@@ -33,7 +33,7 @@ export default function Navbar() {
                         How it Works
                     </a>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
