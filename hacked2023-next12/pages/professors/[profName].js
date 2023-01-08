@@ -9,11 +9,11 @@ export default function Class({ professor }) {
     const router = useRouter()
     const profName = router.query.profName   
 
-    const courses = professor[0].courses.map((course, id) => {
+    const courses = professor[0].courses.map((course) => {
         console.log(course.course.name)
         return (
-            <Link className={styles.courseLink} href={"/professors/" + course.course.name}>
-                <div className={styles.courseCard} key={course.id}>
+            <Link className={styles.courseLink} key={course.id} href={"/professors/" + course.course.name}>
+                <div className={styles.courseCard}>
                     <h4 className={styles.courseName}>
                         {course.course.name}
                     </h4>
