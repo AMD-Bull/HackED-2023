@@ -4,7 +4,6 @@
     min-width: 100vh;
 }
 
-
 .contentWrapper {
     display: flex;
     flex-direction: row;
@@ -27,8 +26,19 @@
 
 .classTitle {
     color: black;
-    font-size: 24px;
+    font-size: 34px;
     text-align: center;
+}
+
+.subtitle {
+    color: black;
+    font-size: 18px;
+}
+
+.largerSubtitle {
+    color: black;
+    font-size: 26px;
+    padding-bottom: 20px;
 }
 
 .ratingsWrapper {
@@ -37,16 +47,26 @@
     justify-content: space-between;    
 }
 
+.overallRating {
+    display: flex;
+    font-size: 56px;
+    color: black;
+    margin: none;
+}
+
 .rating {
     display: flex;
-    font-size: 24px;
+    font-size: 32px;
     color: black;
+    justify-content: center;
+    align-items: center;
+    margin: none;
 }
 
 .classDescription {
     display: flex;
     color: black;
-    font-size: 18px;
+    font-size: 20px;
     padding: 10px;
 }
 
@@ -103,7 +123,7 @@
     padding: 15px;
     border-radius: 20px;
     /* box-shadow: 3px 3px 3px 1px gray; */
-    height: 600px;
+    height: 100%;
 }
 
 .professorCard:hover {

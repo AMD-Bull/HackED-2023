@@ -20,6 +20,9 @@ export default function Class({ course }) {
                     <p className={styles.classDescription}>
                         Computer arithmetic and errors. The study of computational methods for solving problems in linear algebra, non-linear equations, optimization, interpolation and approximation, and integration. This course will provide a basic foundation in numerical methods that supports further study in machine learning; computer graphics, vision and multimedia; robotics; and other topics in Science and Engineering.
                     </p>
+                    <div className={styles.classDescription}>
+                        Current course offerings:
+                    </div>
                     <div className={styles.scheduleWrapper}>
                         <div className={styles.schedule}>
                             <h3 className={styles.time}>
@@ -48,8 +51,11 @@ export default function Class({ course }) {
                     </div>
                 </div>
                 <div className={styles.rightSide}>
+                    <div className={styles.subtitle}>
+                        Over a total of x submissions
+                    </div>
                     <div className={styles.ratingsWrapper}>
-                        <h2 className={styles.rating}>
+                        <h2 className={styles.overallRating}>
                             {course[0].overall}/5
                         </h2>
                         <h2 className={styles.rating}>
@@ -58,6 +64,9 @@ export default function Class({ course }) {
                         <h2 className={styles.rating}>
                             Usefulness: {course[0].knowledge_increase}/5
                         </h2>
+                    </div>
+                    <div className={styles.largerSubtitle}>
+                        Professors who teach this course:
                     </div>
                     <div className={styles.professorWrapper}>
                         <a className={styles.professorLink} href="/professors/Buddy McGuy">
