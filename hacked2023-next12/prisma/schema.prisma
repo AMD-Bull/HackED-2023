@@ -21,7 +21,7 @@ model Professor {
 model Course {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String   @unique
-  faculty    String
+  title      String 
   course_quality Float
   knowledge_increase Float
   overall Float
@@ -60,6 +60,7 @@ model courseOffering {
   course_name String 
   day         String
   time        String
+  course_code Int
   course_id   String    @db.ObjectId
   prof_id     String    @db.ObjectId
   course      Course    @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
