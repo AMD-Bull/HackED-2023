@@ -8,8 +8,10 @@ from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 from math import ceil
 import time
-username = input("user: ")
-password = input("password ")
+import json
+
+username = ""
+password = ""
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get("https://tsqs.srv.ualberta.ca/cgi-bin/usri/usri.pl")
 
@@ -111,6 +113,7 @@ def CourseOrProfSearch(SearchInput,CrsBool=True):
 # grabs the html from the current list
 def dataGrabber():
     htmls=[]
+    time.sleep(0.5)
     list=driver.find_element(by = By.NAME, value = "rep_list")
     searchResults = Select(list)
     option_list = searchResults.options
@@ -118,10 +121,12 @@ def dataGrabber():
     totalSearches=ceil(listLength/20)
     remainder = listLength-((totalSearches-1)*20)
     for x in range(totalSearches):
+        time.sleep(0.5)
         list=driver.find_element(by = By.NAME, value = "rep_list")
         searchResults = Select(list)
         searchResults.deselect_all()
         if ((remainder != 0) and (x==(totalSearches-1))):
+            time.sleep(0.5)
             element = driver.find_element(by = By.NAME, value = "rep_list")
             driver.execute_script("arguments[0].size = '200'", element)
             for i in range(remainder):
@@ -130,6 +135,7 @@ def dataGrabber():
             htmls.append(driver.page_source)
             driver.execute_script("window.history.go(-1)")
         else:
+            time.sleep(0.5)
             element = driver.find_element(by = By.NAME, value = "rep_list")
             driver.execute_script("arguments[0].size = '200'", element)
             for i in range(20):
@@ -233,10 +239,20 @@ def dataProcessor(htmlInput,count):
 
     return(profList)
 login(username,password)
-year=2021
-course="CMPUT 174 LEC"
-years(2000,2021)
-CourseOrProfSearch(course)
-data,count=dataGrabber()
-final=dataProcessor(data,count)
+years(2000,2020)
+
+with open('./json_data.json', 'r') as f:
+        data = json.load(f)
+
+dataSet = set()
+for entry in data:
+    nameSplit = entry[0]["Course"].split("-")
+    dataSet.add(nameSplit[0].strip())
+
+for course in dataSet:
+    CourseOrProfSearch(course+" LEC")
+    data,count=dataGrabber()
+    final=dataProcessor(data,count)
+    driver.execute_script("window.history.go(-1)")
+    driver.execute_script("window.history.go(-1)")
 time.sleep(1)
