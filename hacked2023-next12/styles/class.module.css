@@ -1,26 +1,8 @@
 .background {
-    background: white;
+    background: #C7CCDB;
     min-height: 100vh;
     min-width: 100vh;
-
-
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-name: changebg;
 }
-
-@keyframes changebg {
-    0% {
-        background: red;
-    }
-    50% {
-        background: blue;
-    }
-    100% {
-        background: red;
-    }
-}
-
 
 
 .contentWrapper {
@@ -45,7 +27,7 @@
 
 .classTitle {
     color: black;
-    font-size: 24;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -57,20 +39,20 @@
 
 .rating {
     display: flex;
-    font-size: 20;
+    font-size: 24px;
     color: black;
 }
 
 .classDescription {
     display: flex;
     color: black;
-    font-size: 14;
+    font-size: 18px;
     padding: 10px;
 }
 
 .syllabusLink {
     color: black;
-    font-size: 14;
+    font-size: 14px
 }
 
 .scheduleWrapper {
@@ -84,9 +66,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: lightgray;
+    background: #E1E5EE;
     border-radius: 20px;
-    box-shadow: 3px 3px 3px 1px gray;
+    /* box-shadow: 3px 3px 3px 1px gray; */
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -109,26 +91,24 @@
 
 .professorLink {
     text-decoration: none;
+    width: stretch;
 }
 
 .professorCard {
     display: flex;
     flex-direction: column;
-    background: lightgray;
+    background: #E1E5EE;
     justify-content: none;
     align-items: left;
     padding: 15px;
     border-radius: 20px;
-    box-shadow: 3px 3px 3px 1px gray;
-    width: auto;
+    /* box-shadow: 3px 3px 3px 1px gray; */
     height: 600px;
 }
 
 .professorCard:hover {
-    transform:scale(1.1);
-    transform:rotate(720deg);
-    background:limegreen;
-    transition: 0.5s ease-in-out;
+    transform:scale(1.01);
+    transition: 0.5s ease;
 }
 
 .professorName {

@@ -15,10 +15,10 @@ export default function Class({ course }) {
             <div className={styles.contentWrapper}>
                 <div className={styles.leftSide}>
                     <h1 className={styles.classTitle}>
-                        {course[0].title} - {className}
+                    {className} - {course[0].title}
                     </h1>
-                    <p className={styles.description}>
-                    Computer arithmetic and errors. The study of computational methods for solving problems in linear algebra, non-linear equations, optimization, interpolation and approximation, and integration. This course will provide a basic foundation in numerical methods that supports further study in machine learning; computer graphics, vision and multimedia; robotics; and other topics in Science and Engineering.
+                    <p className={styles.classDescription}>
+                        Computer arithmetic and errors. The study of computational methods for solving problems in linear algebra, non-linear equations, optimization, interpolation and approximation, and integration. This course will provide a basic foundation in numerical methods that supports further study in machine learning; computer graphics, vision and multimedia; robotics; and other topics in Science and Engineering.
                     </p>
                     <div className={styles.scheduleWrapper}>
                         <div className={styles.schedule}>
@@ -50,13 +50,13 @@ export default function Class({ course }) {
                 <div className={styles.rightSide}>
                     <div className={styles.ratingsWrapper}>
                         <h2 className={styles.rating}>
-                            Course Quality: {course[0].course_quality}
+                            {course[0].overall}/5
                         </h2>
                         <h2 className={styles.rating}>
-                            Knowledge Increase: {course[0].knowledge_increase}
+                            Quality: {course[0].course_quality}/5
                         </h2>
                         <h2 className={styles.rating}>
-                            Overall: {course[0].overall}
+                            Usefulness: {course[0].knowledge_increase}/5
                         </h2>
                     </div>
                     <div className={styles.professorWrapper}>
@@ -73,7 +73,7 @@ export default function Class({ course }) {
                         <a className={styles.professorLink} href="/professors/Silly Hill Billy">
                             <div className={styles.professorCard}>
                                 <h4 className={styles.professorName}>
-                                    Buddy McGuy
+                                    Silly Hill Billy
                                 </h4>
                                 <div className={styles.professorRatings}>
                                     idk how this will be
