@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styles from '../../styles/professor.module.css';
 import Navbar from "../../components/navbar";
 import { PrismaClient } from '@prisma/client'
+import Link from 'next/link'
 
 export default function Class({ professor }) {
 
@@ -11,8 +12,8 @@ export default function Class({ professor }) {
     const courses = professor[0].courses.map((course, id) => {
         console.log(course.course.name)
         return (
-            <a className={styles.courseLink} href={"/professors/" + course.course.name}>
-                <div className={styles.courseCard}>
+            <Link className={styles.courseLink} href={"/professors/" + course.course.name}>
+                <div className={styles.courseCard} key={course.id}>
                     <h4 className={styles.courseName}>
                         {course.course.name}
                     </h4>
@@ -28,7 +29,7 @@ export default function Class({ professor }) {
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         );
     });
 

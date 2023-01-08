@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styles from '../../styles/class.module.css';
 import Navbar from "../../components/navbar";
 import { PrismaClient } from '@prisma/client'
+import Link from 'next/link'
 
 
 export default function Class({ course }) {
@@ -10,8 +11,7 @@ export default function Class({ course }) {
     const className = router.query.className
 
     function getRounded (input) {
-        debugger;
-        return new Intl.NumberFormat('en', { maximumSignificantDigits: 1 }).format(input);
+        return String(input).slice(0, 3);
     }
 
     function getRand() {
@@ -21,8 +21,8 @@ export default function Class({ course }) {
     const profs = course[0].professors.map((prof, id) => {
         console.log(prof.professor.name)
         return (
-            <a className={styles.professorLink} href={"/professors/" + prof.professor.name}>
-                <div className={styles.professorCard}>
+            <Link className={styles.professorLink} href={"/professors/" + prof.professor.name}>
+                <div className={styles.professorCard} key={prof.id}>
                     <h4 className={styles.professorName}>
                         {prof.professor.name}
                     </h4>
@@ -41,7 +41,7 @@ export default function Class({ course }) {
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         );
     });
 
@@ -59,32 +59,6 @@ export default function Class({ course }) {
                     <div className={styles.classDescription}>
                         Current course offerings:
                     </div>
-                    {/* <div className={styles.scheduleWrapper}>
-                        <div className={styles.schedule}>
-                            <h3 className={styles.time}>
-                                9 am
-                            </h3>
-                            <h3 className={styles.date}>
-                                W23
-                            </h3>
-                        </div>
-                        <div className={styles.schedule}>
-                            <h3 className={styles.time}>
-                                10 am
-                            </h3>
-                            <h3 className={styles.date}>
-                                W23
-                            </h3>
-                        </div>
-                        <div className={styles.schedule}>
-                            <h3 className={styles.time}>
-                                11 am
-                            </h3>
-                            <h3 className={styles.date}>
-                                W23
-                            </h3>
-                        </div>
-                    </div> */}
                 </div>
                 <div className={styles.rightSide}>
                     <div className={styles.subtitle}>
@@ -108,26 +82,6 @@ export default function Class({ course }) {
                         <li className={styles.list}>
                             {profs}
                         </li>
-                        {/* <a className={styles.professorLink} href="/professors/Buddy McGuy">
-                            <div className={styles.professorCard}>
-                                <h4 className={styles.professorName}>
-                                    Buddy McGuy
-                                </h4>
-                                <div className={styles.professorRatings}>
-                                    idk how this will be
-                                </div>
-                            </div>
-                        </a>
-                        <a className={styles.professorLink} href="/professors/Silly Hill Billy">
-                            <div className={styles.professorCard}>
-                                <h4 className={styles.professorName}>
-                                    Silly Hill Billy
-                                </h4>
-                                <div className={styles.professorRatings}>
-                                    idk how this will be
-                                </div>
-                            </div>
-                        </a> */}
                     </div>
                 </div>
             </div>
