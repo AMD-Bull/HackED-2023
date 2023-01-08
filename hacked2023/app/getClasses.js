@@ -1,24 +1,17 @@
-export function getAllPostIds() {
-    const fileNames = fs.readdirSync(postsDirectory);
-  
-    // Returns an array that looks like this:
-    // [
-    //   {
-    //     params: {
-    //       id: 'ssg-ssr'
-    //     }
-    //   },
-    //   {
-    //     params: {
-    //       id: 'pre-rendering'
-    //     }
-    //   }
-    // ]
-    return fileNames.map((fileName) => {
-      return {
-        params: {
-          id: fileName.replace(/\.md$/, ''),
-        },
-      };
-    });
-  }
+
+
+
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+
+export default async function getCourses() {
+  const courses = await prisma.course.findMany()
+  return courses
+//   var options = '';
+
+//   for (var i = 0; i < courses.length; i++) {
+//     options += '<option value="' + courses[i].name + '" className={styles.option}/>';
+//   }
+//   return options
+}
