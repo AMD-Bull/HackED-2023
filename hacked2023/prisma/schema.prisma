@@ -47,7 +47,7 @@ model ProfHasCourse {
   instructor_quality Float
 
   // Mains
-  total_score Float
+  total_score        Float
   total_course_score Float
   total_comm_score   Float
 
@@ -60,19 +60,19 @@ model courseOffering {
   course_name String 
   day         String
   time        String
-  course_id   String   @db.ObjectId
-  prof_id    String   @db.ObjectId
-  course      Course @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  course_id   String    @db.ObjectId
+  prof_id     String    @db.ObjectId
+  course      Course    @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   professor   Professor @relation(fields: [prof_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   course_labs courseLab[]
 }
 
 model courseLab {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  offering_id  String    @db.ObjectId
-  day String
-  time String
-  course_code Int
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  offering_id      String    @db.ObjectId
+  day              String
+  time             String
+  course_code      Int
   course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
 }
 
