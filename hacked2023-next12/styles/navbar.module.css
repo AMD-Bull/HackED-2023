@@ -1,6 +1,6 @@
 .wrapper {
     display: flex;
-    background: #476fff;
+    background: #2A324B;
     height: 80px;
     width: 100%;
     flex-direction: row;
@@ -31,6 +31,7 @@
     color: white;
     font-size: 26px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .link:hover {

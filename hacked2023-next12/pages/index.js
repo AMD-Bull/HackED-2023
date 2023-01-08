@@ -36,20 +36,6 @@ export default function Home({ names }) {
                 Search
             </Button>
           </form>
-          {/* <form className={styles.form} action="#">
-          <datalist className={styles.list} id="courses">
-              <div dangerouslySetInnerHTML={{ __html: courses }} />
-          </datalist>
-          <input 
-              className={styles.searchBar}
-              placeholder="Search by class"
-              id="classname"
-              type="text"
-              autoComplete="off"
-              list="courses"
-              onKeyUp={filterClasses()}
-          />
-          </form> */}
           <div className={styles.subLink}>
           Or search by professor
           </div>

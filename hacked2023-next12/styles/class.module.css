@@ -1,5 +1,140 @@
 .background {
-    background: #476fff;
+    background: #C7CCDB;
     min-height: 100vh;
     min-width: 100vh;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 25px;
+    gap: 25px;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.classTitle {
+    color: black;
+    font-size: 34px;
+    text-align: center;
+}
+
+.subtitle {
+    color: black;
+    font-size: 18px;
+}
+
+.largerSubtitle {
+    color: black;
+    font-size: 26px;
+    padding-bottom: 20px;
+}
+
+.ratingsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.overallRating {
+    display: flex;
+    font-size: 56px;
+    color: black;
+    margin: none;
+}
+
+.rating {
+    display: flex;
+    font-size: 32px;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    margin: none;
+}
+
+.classDescription {
+    display: flex;
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.syllabusLink {
+    color: black;
+    font-size: 14px
+}
+
+.scheduleWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+}
+
+.schedule {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #E1E5EE;
+    border-radius: 20px;
+    /* box-shadow: 3px 3px 3px 1px gray; */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.time {
+    color: black;
+} 
+
+.date {
+    color: black;
+}
+
+.professorWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.professorLink {
+    text-decoration: none;
+    width: stretch;
+}
+
+.professorCard {
+    display: flex;
+    flex-direction: column;
+    background: #E1E5EE;
+    justify-content: none;
+    align-items: left;
+    padding: 15px;
+    border-radius: 20px;
+    /* box-shadow: 3px 3px 3px 1px gray; */
+    height: 100%;
+}
+
+.professorCard:hover {
+    transform:scale(1.01);
+    transition: 0.5s ease;
+}
+
+.professorName {
+    color: black;
+}
+
+.professorRatings {
+    color: black;
 }
