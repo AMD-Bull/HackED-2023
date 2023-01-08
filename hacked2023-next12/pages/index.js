@@ -8,36 +8,53 @@ import { Button } from '@mui/material';
 import {useRouter} from 'next/router'
 
 
+
 export default function Home({ names }) {
+
+    const [value, setValue] = React.useState('');
+    const [inputValue, setInputValue] = React.useState('');
+
     const router = useRouter()
     const [route, setRoute] = useState()
     const handleSubmit = (e) => {
         e.preventDefault()
         router.push("/classes/" + route)
     }  
+
+
   return (
     <main className={styles.main}>
       <Navbar />
       <div className={styles.contentWrapper}>
           <div className={styles.description}>
-              <h1 className={styles.title}>
+              <div className={styles.title}>
                   Grizzly Trails
-              </h1>
-              <p className={styles.subtitle}>
+              </div>
+              <div className={styles.subtitle}>
                   Faster and meaner than bear tracks
-              </p>
+              </div>
           </div>
-          <form onSubmit={handleSubmit}>
-            <input type="text" name='route' onChange={(e)=>{setRoute(e.target.value)}} />
+          <form className={styles.searchWrapper} onSubmit={handleSubmit}>
+            <Autocomplete
+                route={route}
+                onChange={(event, newValue) => {
+                    setRoute(newValue);
+                }}
+                onInputChange={(event, newInputValue) => {
+                    setRoute(newInputValue);
+                }}
+                disablePortal
+                id="combo-box-demo"
+                options={names}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField className={styles.searchBar} {...params} name="route" label="Class" />}
+            />
             <Button
                 type="submit"
             >
                 Search
             </Button>
           </form>
-          <div className={styles.subLink}>
-          Or search by professor
-          </div>
       </div>
     </main>
   )
