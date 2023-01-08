@@ -4,7 +4,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import pandas as pd
-import csv
+import json
 
 driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 
@@ -41,9 +41,10 @@ for a in soup.findAll('a', href=True,attrs={'class':'d-block'}):
             temp2.append(_instructors[i].get_text().replace("Primary Instructor:  ",'').strip())
             temp.append(temp2)
         courses[course] = [desc,temp]
-with open("Courses_Detailed.csv", 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['Course',"Description","Section","Date Times", "Instructors"])
-        for course in courses.keys():
+
+with open('json_data.json', 'w') as outfile:
+    data = []
+    for course in courses.keys():
             for p in courses[course][1]:
-                writer.writerow([course,courses[course][0],p[0],p[1],p[2]])
+                data.append([{course:{"Description":courses[course][0],"Section":p[0],"Date Times":p[1],"Instructors":p[2]}}])
+    json.dump(data, outfile)
