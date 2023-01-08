@@ -12,7 +12,7 @@ export default function Class({ professor }) {
     const courses = professor[0].courses.map((course) => {
         console.log(course.course.name)
         return (
-            <Link className={styles.courseLink} key={course.id} href={"/professors/" + course.course.name}>
+            <Link className={styles.courseLink} key="{course.id}" href={"/professors/" + course.course.name}>
                 <div className={styles.courseCard}>
                     <h4 className={styles.courseName}>
                         {course.course.name}

@@ -21,7 +21,7 @@ export default function Class({ course }) {
     const profs = course[0].professors.map((prof) => {
         console.log(prof.professor.name)
         return (
-            <Link className={styles.professorLink} key={prof.id} href={"/professors/" + prof.professor.name}>
+            <Link className={styles.professorLink} key="{prof.id}" href={"/professors/" + prof.professor.name}>
                 <div className={styles.professorCard}>
                     <h4 className={styles.professorName}>
                         {prof.professor.name}
