@@ -1,5 +1,140 @@
 .background {
-    background: #476fff;
+    background: white;
     min-height: 100vh;
     min-width: 100vh;
+
+
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-name: changebg;
+}
+
+@keyframes changebg {
+    0% {
+        background: red;
+    }
+    50% {
+        background: blue;
+    }
+    100% {
+        background: red;
+    }
+}
+
+
+
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 25px;
+    gap: 25px;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.classTitle {
+    color: black;
+    font-size: 24;
+    text-align: center;
+}
+
+.ratingsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.rating {
+    display: flex;
+    font-size: 20;
+    color: black;
+}
+
+.classDescription {
+    display: flex;
+    color: black;
+    font-size: 14;
+    padding: 10px;
+}
+
+.syllabusLink {
+    color: black;
+    font-size: 14;
+}
+
+.scheduleWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+}
+
+.schedule {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: lightgray;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 1px gray;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.time {
+    color: black;
+} 
+
+.date {
+    color: black;
+}
+
+.professorWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.professorLink {
+    text-decoration: none;
+}
+
+.professorCard {
+    display: flex;
+    flex-direction: column;
+    background: lightgray;
+    justify-content: none;
+    align-items: left;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 1px gray;
+    width: auto;
+    height: 600px;
+}
+
+.professorCard:hover {
+    transform:scale(1.1);
+    transform:rotate(720deg);
+    background:limegreen;
+    transition: 0.5s ease-in-out;
+}
+
+.professorName {
+    color: black;
+}
+
+.professorRatings {
+    color: black;
 }

@@ -11,7 +11,7 @@ export default function Professor() {
         <main profName={styles.background}>
             <Navbar />
             <h1>
-                This is the description for course {profName}
+                This is the description for senorita {profName}
             </h1>
         </main>
     )
