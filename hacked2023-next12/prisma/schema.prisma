@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = "mongodb+srv://mahmadi:Hacked2023@hacked2023.nuwy03q.mongodb.net/Hacked2023?appName=mongosh+1.6.0"
 }
 
 model Professor {

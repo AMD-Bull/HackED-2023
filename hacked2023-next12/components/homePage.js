@@ -1,17 +1,23 @@
-    
 
 import styles from '../styles/home.module.css'
-
+import { PrismaClient } from '@prisma/client'
 
 export const getServerSideProps = async () => {
-    const posts = await prisma.course.findMany()
+    const prisma = new PrismaClient()
+
+    const courses = await prisma.course.findMany()
+    console.log(courses)
     return { props: { courses } }
-  }
+}
 
 function filterClasses() {
+    if (typeof window !== "undefined") {
+        // browser code
     // Get the input field
-    var input = document.getElementById("classname");
-    console.log(input.value)
+        const input = document.getElementById("classname");
+        console.log("HI")
+        console.log(input.value)
+    }
     // Get the filter value
     // var filter = input.value.toLowerCase();
     // // Get the list items
@@ -30,6 +36,8 @@ function filterClasses() {
 
 
 export default function HomePage({courses}) {
+
+    console.log(courses)
    
     return (
         <div className={styles.contentWrapper}>
@@ -52,7 +60,7 @@ export default function HomePage({courses}) {
                 type="text"
                 autoComplete="off"
                 list="courses"
-                onKeyUp={() => filterClasses()}
+                onKeyUp={filterClasses()}
             />
             </form>
             <div className={styles.subLink}>
