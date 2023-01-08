@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Professor {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  course_quality Float
+  communication  Float
+  teaching_quality Float
+  overall       Float
+  courses    ProfHasCourse[]
+  currently_teaching   courseOffering[]
+}
+
+model Course {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String   @unique
+  faculty    String
+  course_quality Float
+  knowledge_increase Float
+  overall Float
+  professors ProfHasCourse[]
+  offerings  courseOffering[]
+}
+
+model ProfHasCourse {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  prof_id    String    @db.ObjectId
+  course_id  String    @db.ObjectId
+  
+  // Smaller data sets
+  goals_obj  Float
+  time_use   Float
+  motivation Float
+  knowledge  Float
+  course_quality Float
+  instructor_clarity Float
+  preparedness Float
+  student_respect Float
+  feedback Float
+  instructor_quality Float
+
+  // Mains
+  total_score        Float
+  total_course_score Float
+  total_comm_score   Float
+
+  professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+}
+
+model courseOffering {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  course_name String 
+  day         String
+  time        String
+  course_id   String    @db.ObjectId
+  prof_id     String    @db.ObjectId
+  course      Course    @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  professor   Professor @relation(fields: [prof_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  course_labs courseLab[]
+}
+
+model courseLab {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  offering_id      String    @db.ObjectId
+  day              String
+  time             String
+  course_code      Int
+  course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
+}
+
+
