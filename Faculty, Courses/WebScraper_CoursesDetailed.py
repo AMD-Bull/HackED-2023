@@ -46,5 +46,5 @@ with open('json_data.json', 'w') as outfile:
     data = []
     for course in courses.keys():
             for p in courses[course][1]:
-                data.append([{course:{"Description":courses[course][0],"Section":p[0],"Date Times":p[1],"Instructors":p[2]}}])
+                data.append([{"Course":course,"Description":courses[course][0],"Section":p[0],"Date Times":p[1],"Instructors":p[2]}])
     json.dump(data, outfile)
