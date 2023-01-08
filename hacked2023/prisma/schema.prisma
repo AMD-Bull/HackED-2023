@@ -75,5 +75,3 @@ model courseLab {
   course_code      Int
   course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
 }
-
-

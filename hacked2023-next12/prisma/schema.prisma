@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://mahmadi:Hacked2023@hacked2023.nuwy03q.mongodb.net/Hacked2023?appName=mongosh+1.6.0"
+  url      = env("DATABASE_URL")
 }
 
 model Professor {
@@ -75,5 +75,3 @@ model courseLab {
   course_code      Int
   course_offering  courseOffering @relation(fields: [offering_id], references: [id], onDelete: Cascade, onUpdate: Cascade)  
 }
-
-

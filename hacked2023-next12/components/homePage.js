@@ -2,14 +2,6 @@
 import styles from '../styles/home.module.css'
 import { PrismaClient } from '@prisma/client'
 
-export const getServerSideProps = async () => {
-    const prisma = new PrismaClient()
-
-    const courses = await prisma.course.findMany()
-    console.log(courses)
-    return { props: { courses } }
-}
-
 function filterClasses() {
     if (typeof window !== "undefined") {
         // browser code
@@ -35,7 +27,7 @@ function filterClasses() {
   }
 
 
-export default function HomePage({courses}) {
+export default function HomePage({ courses }) {
 
     console.log(courses)
    
@@ -68,4 +60,11 @@ export default function HomePage({courses}) {
             </div>
         </div>
     )
+}
+
+export async function getServerSideProps(){
+    const prisma = new PrismaClient()
+    const courses = await prisma.course.findMany()
+    console.log(courses)
+    return { props: { courses } }
 }
