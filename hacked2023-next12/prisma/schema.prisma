@@ -69,6 +69,6 @@ model prof_has_course {
   total_comm_score   Float
   total_course_score Float
   total_score        Float
-  professor  Professor @relation(fields: [prof_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  course     Course    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+  professor  Professor @relation(fields: [prof_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  course     Course    @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Cascade) 
 }

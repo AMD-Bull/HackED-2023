@@ -7,11 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 from math import ceil
+import asyncio
+from prisma import Prisma
 import time
 import json
 
-username = ""
-password = ""
+username = "mahmadi"
+password = "Darchaloos1"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get("https://tsqs.srv.ualberta.ca/cgi-bin/usri/usri.pl")
 
@@ -103,6 +105,7 @@ def years(yearlow,yearupper=None):
 # Second input is option if searching for the defualt of the Course Title, If choosing to Sort by Prof input as False
 def CourseOrProfSearch(SearchInput,CrsBool=True):
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "Execute Search")))
+    clear = driver.find_element(by = By.NAME, value = "search_text").clear()
     if CrsBool == True:
         driver.find_element(by = By.NAME, value = "search_text").send_keys(SearchInput)
     elif CrsBool == False:
@@ -113,7 +116,6 @@ def CourseOrProfSearch(SearchInput,CrsBool=True):
 # grabs the html from the current list
 def dataGrabber():
     htmls=[]
-    time.sleep(0.5)
     list=driver.find_element(by = By.NAME, value = "rep_list")
     searchResults = Select(list)
     option_list = searchResults.options
@@ -121,12 +123,10 @@ def dataGrabber():
     totalSearches=ceil(listLength/20)
     remainder = listLength-((totalSearches-1)*20)
     for x in range(totalSearches):
-        time.sleep(0.5)
         list=driver.find_element(by = By.NAME, value = "rep_list")
         searchResults = Select(list)
         searchResults.deselect_all()
         if ((remainder != 0) and (x==(totalSearches-1))):
-            time.sleep(0.5)
             element = driver.find_element(by = By.NAME, value = "rep_list")
             driver.execute_script("arguments[0].size = '200'", element)
             for i in range(remainder):
@@ -135,7 +135,6 @@ def dataGrabber():
             htmls.append(driver.page_source)
             driver.execute_script("window.history.go(-1)")
         else:
-            time.sleep(0.5)
             element = driver.find_element(by = By.NAME, value = "rep_list")
             driver.execute_script("arguments[0].size = '200'", element)
             for i in range(20):
@@ -239,7 +238,7 @@ def dataProcessor(htmlInput,count):
 
     return(profList)
 login(username,password)
-years(2000,2020)
+years(2020,2021)
 
 with open('./json_data.json', 'r') as f:
         data = json.load(f)
@@ -249,10 +248,71 @@ for entry in data:
     nameSplit = entry[0]["Course"].split("-")
     dataSet.add(nameSplit[0].strip())
 
+toDo = []
 for course in dataSet:
     CourseOrProfSearch(course+" LEC")
-    data,count=dataGrabber()
-    final=dataProcessor(data,count)
-    driver.execute_script("window.history.go(-1)")
+    try:
+        data,count=dataGrabber()
+    except:
+        driver.execute_script("window.history.go(-1)")
+        continue
+    try:
+        final=dataProcessor(data,count)
+        toDo.append(final[0])
+    except:
+        driver.execute_script("window.history.go(-1)")
+        continue
     driver.execute_script("window.history.go(-1)")
 time.sleep(1)
+    
+
+async def createProf(dbEntries) -> None:
+    prisma = Prisma()
+    await prisma.connect()
+    for entry in dbEntries:
+        prof = await prisma.professor.find_first(
+            where={
+                'name': entry["name"]
+            }
+        )
+        coursetaught = await prisma.course.find_first(
+            where={
+                'name': entry["class"].course
+            }
+        )
+        if coursetaught == None or prof == None:
+            continue
+        createdProf = await prisma.professor.update(
+            where={
+                'id': prof.id
+            },
+            data={
+                'courses': {
+                    'create': {
+                        'course_id': coursetaught.id,
+                        'goals_obj': entry["class"].goals,
+                        'time_use': entry["class"].timeEfficent,
+                        'motivation': entry["class"].motivation,
+                        'knowledge': entry["class"].knowledgeIncrease,
+                        'course_quality': entry["class"].courseQual,
+                        'instructor_clarity': entry["class"].communication,
+                        'preparedness': entry["class"].prepared,
+                        'student_respect': entry["class"].respect,
+                        'feedback': entry["class"].feedback,
+                        'instructor_quality': entry["class"].instructQual,
+                        'total_score': entry["class"].overallQual,
+                        'total_course_score': entry["class"].teachingQual,
+                        'total_comm_score': entry["class"].instructQual,
+                    }
+                }
+            }
+        )
+        prisma.disconnect()
+    
+
+async def main() -> None:
+    await createProf(toDo)
+    
+
+if __name__ == '__main__':
+    asyncio.run(main())
