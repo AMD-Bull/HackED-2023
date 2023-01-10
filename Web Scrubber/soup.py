@@ -12,8 +12,8 @@ import time
 import json
 
 allCourse={}
-***REMOVED***
-***REMOVED***
+username = ""
+password = ""
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get("https://tsqs.srv.ualberta.ca/cgi-bin/usri/usri.pl")
 
